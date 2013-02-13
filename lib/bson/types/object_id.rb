@@ -12,6 +12,8 @@ module BSON
   #
   # @core objectids
   class ObjectId
+    include Serializable::JSON
+
     attr_accessor :data
 
     # Create a new object id. If no parameter is given, an id corresponding
@@ -124,20 +126,12 @@ module BSON
       "BSON::ObjectId('#{to_s}')"
     end
 
-    # Convert to MongoDB extended JSON format. Since JSON includes type information,
-    # but lacks an ObjectId type, this JSON format encodes the type using an $oid key.
-    #
-    # @return [String] the object id represented as MongoDB extended JSON.
-    def to_json(*a)
-      "{\"$oid\": \"#{to_s}\"}"
-    end
-
     # Create the JSON hash structure convert to MongoDB extended format. Rails 2.3.3 
     # introduced as_json to create the needed hash structure to encode objects into JSON.
     #
     # @return [Hash] the hash representation as MongoDB extended JSON
     def as_json(options ={})
-      {"$oid" => to_s}
+      { "$oid" => to_s }
     end
 
     # Return the UTC time at which this ObjectId was generated. This may

@@ -14,9 +14,14 @@ module BSON
   #       {"_id"=>4b5a04ea238d3bace2000003, "n"=>#<Mongo::MaxKey:0x1014ef410>},
   #      ]
   class MaxKey
+    include Serializable::JSON
 
     def ==(obj)
       obj.class == MaxKey
+    end
+
+    def as_json(*)
+      { "$maxKey" => 1 }
     end
   end
 
@@ -34,9 +39,14 @@ module BSON
   #       {"_id"=>4b5a04ea238d3bace2000003, "n"=>1_000_000},
   #      ]
   class MinKey
+    include Serializable::JSON
 
     def ==(obj)
       obj.class == MinKey
+    end
+
+    def as_json(*)
+      { "$minKey" => 1 }
     end
   end
 end

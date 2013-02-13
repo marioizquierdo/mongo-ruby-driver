@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'test_helper'
 require 'json'
 
@@ -127,7 +128,7 @@ class ObjectIdTest < Test::Unit::TestCase
 
   def test_json
     id = ObjectId.new
-    assert_equal "{\"$oid\": \"#{id}\"}", id.to_json
+    assert_equal "{\"$oid\":\"#{id}\"}", id.to_json
   end
 
   def test_as_json

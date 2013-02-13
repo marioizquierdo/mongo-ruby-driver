@@ -387,7 +387,7 @@ module Mongo
     #
     # @see http://www.mongodb.org/display/DOCS/DB+Ref MongoDB DBRef spec.
     def dereference(dbref)
-      collection(dbref.namespace).find_one("_id" => dbref.object_id)
+      collection(dbref.collection).find_one("_id" => dbref.object_id)
     end
 
     # Evaluate a JavaScript expression in MongoDB.
